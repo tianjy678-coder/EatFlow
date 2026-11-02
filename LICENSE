@@ -1,0 +1,46 @@
+# EatFlow 课程项目许可协议
+
+版权所有 (c) 2026 tianjy678-coder
+
+本项目（以下简称"本作品"，包含 `miniprogram/` 下的全部源代码、文档与数据文件）为个人课程项目，
+按下列条款授权使用。**本作品不是开源软件，不适用 MIT / Apache / GPL 等开源许可。**
+
+## 允许
+
+1. **阅读与学习**：可以阅读、研究本作品的代码与文档，用于个人学习、教学讨论。
+2. **非商业引用**：可以在文章、课程报告、技术分享中引用少量代码片段或截图，
+   但须注明来源（仓库地址与作者）。
+3. **本地运行**：可以克隆到本地运行、调试、修改，用于个人理解与试验。
+
+## 禁止
+
+1. **抄袭与代交**：不得将本作品的全部或实质部分，以任何形式作为自己的课程作业、
+   毕业设计、竞赛作品或工作成果提交；不得去除或篡改版权声明后二次发布。
+2. **商业使用**：未经书面许可，不得将本作品用于任何商业目的，包括但不限于
+   上架应用商店、作为付费产品或服务的一部分、用于商业项目交付。
+3. **数据再分发**：不得单独提取、转售或再分发 `miniprogram/data/pois-zju.js`
+   中的店铺数据与步行时间数据（数据来源与使用限制见 README 的"数据来源与合规"一节）。
+
+## 数据特别说明
+
+`miniprogram/data/pois-zju.js` 为课程演示用静态快照，来源于腾讯位置服务 WebService API
+的查询结果，**不包含**任何腾讯地图底图、瓦片、Logo 或审图号素材，也不随本许可授予任何
+地图数据的使用权。任何将本作品用于公开或商业场景的行为，须自行向腾讯位置服务申请授权，
+并遵守其展示规范（包括但不限于地图 Logo、审图号标注要求）。
+
+## 免责
+
+本作品按"现状"提供，不附带任何明示或暗示的担保。作者不对使用本作品造成的任何直接或
+间接损失承担责任。推荐结果、价格与步行时间均为估算或历史快照，**不构成任何消费建议**。
+
+## 授权咨询
+
+如需超出上述范围使用（例如商用、教学案例库收录），请通过仓库 Issue 联系作者。
+
+---
+
+**English summary (non-binding):** Copyright (c) 2026 tianjy678-coder. This is a personal
+course project, **not** open-source software. Reading, studying, local running and brief
+non-commercial citation with attribution are permitted. Submitting this work (in whole or in
+substance) as one's own coursework, any commercial use, and redistribution of the bundled POI
+dataset are **prohibited** without written permission. Provided "as is", without warranty.
