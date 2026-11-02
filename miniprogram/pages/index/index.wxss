@@ -1,0 +1,133 @@
+.hero {
+  display: flex;
+  flex-direction: column;
+  padding: 20rpx 4rpx 8rpx;
+}
+
+.hero-slogan {
+  color: var(--brand);
+  font-size: 24rpx;
+  font-weight: 600;
+  letter-spacing: 2rpx;
+}
+
+.hero-title {
+  margin-top: 10rpx;
+  font-size: 48rpx;
+  font-weight: 700;
+}
+
+.card {
+  margin-top: 24rpx;
+}
+
+.loc-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.loc-card .card-title {
+  display: block;
+}
+
+.loc-card .muted {
+  display: block;
+  margin-top: 6rpx;
+}
+
+.card-title {
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.link {
+  color: var(--brand);
+  font-size: 26rpx;
+}
+
+.pending {
+  background: var(--gold-soft);
+  border: 2rpx solid #f5dfb8;
+}
+
+.pending-emoji {
+  font-size: 44rpx;
+  margin-right: 20rpx;
+}
+
+.pending-title {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.pending-sub {
+  display: block;
+  margin-top: 6rpx;
+  font-size: 24rpx;
+  color: var(--ink-2);
+}
+
+.pending-btn {
+  margin-top: 20rpx;
+}
+
+.tag-wrap {
+  margin-top: 20rpx;
+}
+
+.kv-row {
+  display: flex;
+  margin-top: 16rpx;
+  font-size: 26rpx;
+}
+
+.kv-key {
+  width: 150rpx;
+  color: var(--ink-3);
+  flex-shrink: 0;
+}
+
+.kv-val {
+  color: var(--ink-2);
+  flex: 1;
+}
+
+.muted {
+  display: block;
+  margin-top: 16rpx;
+  color: var(--ink-3);
+  font-size: 24rpx;
+  line-height: 1.6;
+}
+
+.small {
+  font-size: 22rpx;
+}
+
+.demand-summary {
+  display: block;
+  margin-top: 18rpx;
+  font-size: 28rpx;
+  color: var(--ink);
+  line-height: 1.7;
+}
+
+.cta-wrap {
+  margin-top: 40rpx;
+}
+
+.cta {
+  margin-bottom: 20rpx;
+  font-size: 32rpx;
+}
+
+.footer-note {
+  display: block;
+  margin-top: 32rpx;
+  text-align: center;
+  color: var(--ink-3);
+  font-size: 22rpx;
+}

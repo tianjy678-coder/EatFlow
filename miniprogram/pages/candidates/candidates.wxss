@@ -1,0 +1,175 @@
+.page-tip {
+  display: block;
+  padding: 8rpx 4rpx 0;
+  color: var(--ink-3);
+  font-size: 24rpx;
+}
+
+.pb-extra {
+  padding-bottom: 180rpx;
+}
+
+.tabs {
+  display: flex;
+  gap: 16rpx;
+  margin: 28rpx 0 8rpx;
+}
+
+.tab {
+  padding: 14rpx 26rpx;
+  border-radius: 999rpx;
+  background: #fff;
+  color: var(--ink-2);
+  font-size: 24rpx;
+  border: 2rpx solid var(--line);
+}
+
+.tab.on {
+  background: var(--brand);
+  color: #fff;
+  border-color: var(--brand);
+}
+
+.card {
+  margin-top: 18rpx;
+}
+
+.row-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 28rpx;
+}
+
+.r-name {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.r-meta {
+  display: block;
+  margin-top: 6rpx;
+  color: var(--ink-3);
+  font-size: 22rpx;
+}
+
+.r-edit {
+  color: var(--brand);
+  font-size: 24rpx;
+  margin-left: 20rpx;
+}
+
+.r-del {
+  color: var(--ink-3);
+  font-size: 24rpx;
+  margin-left: 24rpx;
+}
+
+.empty {
+  text-align: center;
+  padding: 80rpx 40rpx;
+  color: var(--ink-3);
+  font-size: 26rpx;
+}
+
+.empty .emoji {
+  font-size: 72rpx;
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.empty .main {
+  color: var(--ink-2);
+  font-size: 28rpx;
+  display: block;
+  margin-bottom: 10rpx;
+}
+
+.fab-fixed {
+  position: fixed;
+  left: 40rpx;
+  right: 40rpx;
+  bottom: 40rpx;
+  z-index: 20;
+}
+
+/* 弹层 */
+.mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(43, 33, 24, 0.45);
+  z-index: 30;
+}
+
+.sheet {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  max-height: 86vh;
+  background: var(--bg);
+  border-radius: 32rpx 32rpx 0 0;
+  z-index: 40;
+  transform: translateY(100%);
+  transition: transform 0.22s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.sheet.show {
+  transform: translateY(0);
+}
+
+.sheet-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28rpx 32rpx 20rpx;
+}
+
+.sheet-title {
+  font-size: 32rpx;
+  font-weight: 700;
+}
+
+.sheet-close {
+  color: var(--ink-3);
+  font-size: 26rpx;
+}
+
+.sheet-body {
+  padding: 0 32rpx 20rpx;
+  flex: 1;
+}
+
+.sheet-foot {
+  padding: 16rpx 32rpx 40rpx;
+}
+
+.req {
+  color: var(--warn);
+}
+
+.hint {
+  color: var(--ink-3);
+  font-size: 22rpx;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.chips .tag {
+  margin-bottom: 12rpx;
+}
+
+.switch-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 28rpx;
+  font-size: 28rpx;
+}

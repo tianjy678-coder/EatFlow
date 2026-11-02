@@ -1,0 +1,120 @@
+<view class="page-pad pb-extra">
+  <text class="page-tip">推荐只在这个池子里挑。关掉不想吃的内置项，或加上你常吃的。</text>
+
+  <view class="tabs">
+    <text class="tab {{tab === 'mine' ? 'on' : ''}}" data-tab="mine" bindtap="switchTab">我加的（{{mine.length}}）</text>
+    <text class="tab {{tab === 'builtin' ? 'on' : ''}}" data-tab="builtin" bindtap="switchTab">内置候选（启用 {{builtinOnCount}}）</text>
+  </view>
+
+  <!-- 自建 -->
+  <block wx:if="{{tab === 'mine'}}">
+    <view class="empty" wx:if="{{!mine.length}}">
+      <text class="emoji">🧺</text>
+      <text class="main">还没有自己加的候选</text>
+      <text>把你常吃的店或菜加进来，推荐会更准</text>
+    </view>
+    <view class="card row-item" wx:for="{{mine}}" wx:key="id">
+      <view class="grow">
+        <text class="r-name">{{item.name}}</text>
+        <text class="r-meta">{{item.venue}} · {{item.scene}} · {{item.price}}</text>
+      </view>
+      <text class="r-edit" data-id="{{item.id}}" bindtap="openEdit">编辑</text>
+      <text class="r-del" data-id="{{item.id}}" bindtap="removeMine">删除</text>
+    </view>
+  </block>
+
+  <!-- 内置 -->
+  <block wx:if="{{tab === 'builtin'}}">
+    <view class="card row-item" wx:for="{{builtin}}" wx:key="id">
+      <view class="grow">
+        <text class="r-name">{{item.name}}</text>
+        <text class="r-meta">{{item.venue}} · {{item.scene}} · {{item.price}}</text>
+      </view>
+      <switch checked="{{item.on}}" color="#FF6B35" data-id="{{item.id}}" bindchange="toggleBuiltin" />
+    </view>
+  </block>
+
+  <button class="btn btn-primary fab-fixed" bindtap="openAdd" wx:if="{{!editing}}">+ 添加一个候选</button>
+</view>
+
+<!-- 新增 / 编辑弹层 -->
+<view class="mask" wx:if="{{editing}}" bindtap="closeForm"></view>
+<view class="sheet {{editing ? 'show' : ''}}">
+  <view class="sheet-head">
+    <text class="sheet-title">{{editingId ? '编辑候选' : '添加候选'}}</text>
+    <text class="sheet-close" bindtap="closeForm">关闭</text>
+  </view>
+
+  <scroll-view scroll-y class="sheet-body">
+    <view class="field">
+      <text class="field-label">名字 <text class="req">必填</text></text>
+      <input class="field-input" placeholder="比如：三楼的水煮肉片" value="{{form.name}}" data-key="name" bindinput="onFormInput" />
+    </view>
+
+    <view class="field">
+      <text class="field-label">在哪吃</text>
+      <input class="field-input" placeholder="比如：三食堂三楼" value="{{form.venue}}" data-key="venue" bindinput="onFormInput" />
+    </view>
+
+    <view class="field">
+      <text class="field-label">场景</text>
+      <view class="chips">
+        <text wx:for="{{formScene}}" wx:key="id" class="tag {{item.selected ? 'tag-selected' : 'tag-line'}}" data-key="formScene" data-id="{{item.id}}" bindtap="toggleFormChip">{{item.label}}</text>
+      </view>
+    </view>
+
+    <view class="field">
+      <text class="field-label">价格（元）</text>
+      <input class="field-input" type="number" value="{{form.price}}" data-key="price" bindinput="onFormNumber" />
+    </view>
+
+    <view class="field">
+      <text class="field-label">出餐 / 等待（分钟）</text>
+      <input class="field-input" type="number" value="{{form.waitMin}}" data-key="waitMin" bindinput="onFormNumber" />
+    </view>
+
+    <view class="field">
+      <text class="field-label">步行时间（分钟）</text>
+      <input class="field-input" type="number" value="{{form.walkMin}}" data-key="walkMin" bindinput="onFormNumber" />
+    </view>
+
+    <view class="field">
+      <text class="field-label">主要食材 <text class="hint">用于过敏 / 禁忌过滤</text></text>
+      <input class="field-input" placeholder="用顿号隔开，比如：鸡肉、土豆" value="{{form.ingredients}}" data-key="ingredients" bindinput="onFormInput" />
+    </view>
+
+    <view class="field">
+      <text class="field-label">标签 <text class="hint">可多选</text></text>
+      <view class="chips">
+        <text wx:for="{{formTags}}" wx:key="id" class="tag {{item.selected ? 'tag-selected' : 'tag-line'}}" data-key="formTags" data-multi="1" data-id="{{item.id}}" bindtap="toggleFormChip">{{item.label}}</text>
+      </view>
+    </view>
+
+    <view class="field">
+      <text class="field-label">辣度</text>
+      <view class="chips">
+        <text wx:for="{{formSpicy}}" wx:key="id" class="tag {{item.selected ? 'tag-selected' : 'tag-line'}}" data-key="formSpicy" data-id="{{item.id}}" bindtap="toggleFormChip">{{item.label}}</text>
+      </view>
+    </view>
+
+    <view class="field">
+      <text class="field-label">营业时段</text>
+      <view class="chips">
+        <text wx:for="{{formHours}}" wx:key="id" class="tag {{item.selected ? 'tag-selected' : 'tag-line'}}" data-key="formHours" data-id="{{item.id}}" bindtap="toggleFormChip">{{item.label}}</text>
+      </view>
+    </view>
+
+    <view class="switch-row">
+      <text class="grow">是热食</text>
+      <switch checked="{{form.hot}}" color="#FF6B35" data-key="hot" bindchange="onFormSwitch" />
+    </view>
+    <view class="switch-row">
+      <text class="grow">适合多人分食</text>
+      <switch checked="{{form.shareable}}" color="#FF6B35" data-key="shareable" bindchange="onFormSwitch" />
+    </view>
+  </scroll-view>
+
+  <view class="sheet-foot">
+    <button class="btn btn-primary" bindtap="submitForm">保存</button>
+  </view>
+</view>

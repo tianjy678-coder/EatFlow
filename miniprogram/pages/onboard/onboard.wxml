@@ -1,0 +1,135 @@
+<view class="page-pad">
+  <!-- 进度 -->
+  <view class="steps">
+    <text class="step-dot {{step >= 0 ? 'on' : ''}}"></text>
+    <text class="step-dot {{step >= 1 ? 'on' : ''}}"></text>
+    <text class="step-dot {{step >= 2 ? 'on' : ''}}"></text>
+  </view>
+
+  <!-- 第 0 步：说明 -->
+  <block wx:if="{{step === 0}}">
+    <view class="hero">
+      <text class="hero-slogan">Food is All You Need</text>
+      <text class="hero-title">帮你决定「这一顿吃什么」</text>
+    </view>
+    <view class="card">
+      <text class="para">你会得到 2-3 个带理由的建议，而不是一长串清单。纠结时还能转个盘。</text>
+      <view class="divider"></view>
+      <text class="block-title">三类数据如何参与推荐</text>
+      <view class="data-row">
+        <text class="data-emoji">📇</text>
+        <view class="grow">
+          <text class="data-title">长期卡片（现在要建的）</text>
+          <text class="data-desc">过敏、禁忌、口味、预算习惯 —— 硬约束优先</text>
+        </view>
+      </view>
+      <view class="data-row">
+        <text class="data-emoji">🎯</text>
+        <view class="grow">
+          <text class="data-title">本次需求（每次决策时选）</text>
+          <text class="data-desc">这次在哪、预算、时间、心情，只影响这一次</text>
+        </view>
+      </view>
+      <view class="data-row">
+        <text class="data-emoji">🕘</text>
+        <view class="grow">
+          <text class="data-title">历史反馈（可选，可关闭）</text>
+          <text class="data-desc">用来减少重复，不会被一次拒绝永久拉黑</text>
+        </view>
+      </view>
+      <view class="divider"></view>
+      <text class="para muted">所有数据只保存在你的手机本地，不联网上传。</text>
+    </view>
+    <button class="btn btn-primary cta" bindtap="nextStep">开始建档</button>
+  </block>
+
+  <!-- 第 1 步：最小卡片 -->
+  <block wx:if="{{step === 1}}">
+    <view class="hero"><text class="hero-title-sm">先建最小卡片</text></view>
+
+    <view class="section-title">过敏原 <text class="req">建议必填</text></view>
+    <view class="card safe-card">
+      <view class="chips">
+        <text wx:for="{{allergies}}" wx:key="id" class="tag {{item.selected ? 'tag-selected' : 'tag-line'}}" data-list="allergies" data-id="{{item.id}}" bindtap="toggle">{{item.label}}</text>
+      </view>
+      <view class="custom-row">
+        <input class="custom-input" placeholder="还有别的？填了回车添加" value="{{customAllergy}}" data-type="allergies" bindinput="onCustomInput" bindconfirm="addCustom" />
+        <button class="btn btn-ghost btn-mini" data-type="allergies" bindtap="addCustom">添加</button>
+      </view>
+    </view>
+
+    <view class="section-title">宗教 / 伦理禁忌 <text class="req">建议必填</text></view>
+    <view class="card">
+      <view class="chips">
+        <text wx:for="{{taboos}}" wx:key="id" class="tag {{item.selected ? 'tag-selected' : 'tag-line'}}" data-list="taboos" data-id="{{item.id}}" bindtap="toggle">{{item.label}}</text>
+      </view>
+      <view class="custom-row">
+        <input class="custom-input" placeholder="比如：不吃牛肉" value="{{customTaboo}}" data-type="taboos" bindinput="onCustomInput" bindconfirm="addCustom" />
+        <button class="btn btn-ghost btn-mini" data-type="taboos" bindtap="addCustom">添加</button>
+      </view>
+    </view>
+
+    <view class="section-title">不喜欢的食材 <text class="hint">可跳过</text></view>
+    <view class="card">
+      <view class="chips">
+        <text wx:for="{{dislikes}}" wx:key="id" class="tag {{item.selected ? 'tag-selected' : 'tag-line'}}" data-list="dislikes" data-id="{{item.id}}" bindtap="toggle">{{item.label}}</text>
+      </view>
+      <view class="custom-row">
+        <input class="custom-input" placeholder="比如：香菜" value="{{customDislike}}" data-type="dislikes" bindinput="onCustomInput" bindconfirm="addCustom" />
+        <button class="btn btn-ghost btn-mini" data-type="dislikes" bindtap="addCustom">添加</button>
+      </view>
+    </view>
+
+    <view class="warn-box" wx:if="{{safeWarning}}">
+      <text class="warn-text">⚠️ 过敏和禁忌都没填。违反它们属于硬约束错误，强烈建议至少填一样。</text>
+      <text class="warn-skip" bindtap="skipSafe">我确定没有，跳过</text>
+    </view>
+
+    <view class="section-title">预算习惯（每餐） <text class="hint">可跳过</text></view>
+    <view class="card">
+      <view class="num-row">
+        <text class="num-prefix">¥</text>
+        <input class="num-input" type="number" value="{{budget}}" bindinput="onBudget" />
+      </view>
+    </view>
+
+    <view class="section-title">口味倾向 <text class="hint">可多选</text></view>
+    <view class="card">
+      <view class="chips">
+        <text wx:for="{{tastes}}" wx:key="id" class="tag {{item.selected ? 'tag-selected' : 'tag-line'}}" data-list="tastes" data-id="{{item.id}}" bindtap="toggle">{{item.label}}</text>
+      </view>
+    </view>
+
+    <view class="section-title">常用吃饭方式 <text class="hint">可多选</text></view>
+    <view class="card">
+      <view class="chips">
+        <text wx:for="{{diningModes}}" wx:key="id" class="tag {{item.selected ? 'tag-selected' : 'tag-line'}}" data-list="diningModes" data-id="{{item.id}}" bindtap="toggle">{{item.label}}</text>
+      </view>
+    </view>
+
+    <view class="btn-row">
+      <button class="btn btn-plain btn-half" bindtap="prevStep">上一步</button>
+      <button class="btn btn-primary btn-half" bindtap="nextStep">下一步</button>
+    </view>
+  </block>
+
+  <!-- 第 2 步：校对 -->
+  <block wx:if="{{step === 2 && review}}">
+    <view class="hero"><text class="hero-title-sm">核对一下你的卡片</text></view>
+    <view class="card">
+      <view class="kv-row"><text class="kv-key">校区</text><text class="kv-val">{{review.campus}}</text></view>
+      <view class="kv-row"><text class="kv-key">过敏 / 禁忌</text><text class="kv-val">{{review.safeText}}</text></view>
+      <view class="kv-row" wx:if="{{review.dislikes.length}}"><text class="kv-key">不吃</text><text class="kv-val">{{review.dislikes}}</text></view>
+      <view class="kv-row" wx:if="{{review.tastes.length}}"><text class="kv-key">口味</text><text class="kv-val">{{review.tastes}}</text></view>
+      <view class="kv-row"><text class="kv-key">常用方式</text><text class="kv-val">{{review.diningModes}}</text></view>
+      <view class="kv-row"><text class="kv-key">预算</text><text class="kv-val">每餐约 ¥{{review.budget}}</text></view>
+    </view>
+    <view class="card tip-card">
+      <text class="para">以后随时能在「我的」里查看、更正或删除这张卡片，不用现在填到完美。</text>
+    </view>
+    <view class="btn-row">
+      <button class="btn btn-plain btn-half" bindtap="prevStep">回去改</button>
+      <button class="btn btn-primary btn-half" bindtap="nextStep">没问题，开始第一顿</button>
+    </view>
+  </block>
+</view>

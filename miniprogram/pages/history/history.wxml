@@ -1,0 +1,50 @@
+<view class="page-pad">
+  <!-- 顶部开关 -->
+  <view class="card topbar">
+    <view class="grow">
+      <text class="topbar-title">记录历史</text>
+      <text class="topbar-sub">记录推荐与反馈，用于减少重复；可随时关闭</text>
+    </view>
+    <switch checked="{{recordHistory}}" color="#FF6B35" bindchange="onRecordToggle" />
+  </view>
+
+  <!-- 待反馈 -->
+  <view class="card pending" wx:if="{{pendingCount}}">
+    <text class="pending-text">有 {{pendingCount}} 顿还没反馈</text>
+    <text class="pending-link" bindtap="goIndex">回首页看看</text>
+  </view>
+
+  <!-- 空态 -->
+  <view class="empty" wx:if="{{loaded && !list.length}}">
+    <text class="emoji">🕘</text>
+    <text class="main">还没有记录</text>
+    <text>发起一次决策，选定的餐食会出现在这里</text>
+    <button class="btn btn-primary empty-btn" bindtap="goIndex">去决定吃什么</button>
+  </view>
+
+  <!-- 列表 -->
+  <block wx:if="{{list.length}}">
+    <view class="list-head">
+      <text>共 {{list.length}} 条</text>
+      <text class="clear-link" bindtap="clearAll">清空</text>
+    </view>
+    <view class="card h-item" wx:for="{{list}}" wx:key="id">
+      <view class="row-between">
+        <view class="grow">
+          <text class="h-name">{{item.name}}</text>
+          <text class="h-meta">{{item.time}} {{item.venue ? ' · ' + item.venue : ''}} {{item.price}}</text>
+        </view>
+        <text class="st {{item.status.cls}}">{{item.status.text}}</text>
+      </view>
+      <view class="h-extra" wx:if="{{item.reason || item.reasons || item.note}}">
+        <text class="h-line" wx:if="{{item.reason}}">来源：{{item.reason}}</text>
+        <text class="h-line" wx:if="{{item.reasons}}">原因：{{item.reasons}}</text>
+        <text class="h-line" wx:if="{{item.note}}">备注：{{item.note}}</text>
+      </view>
+      <view class="h-actions">
+        <text class="h-btn" data-id="{{item.id}}" bindtap="goFeedback">反馈 / 修改</text>
+        <text class="h-btn del" data-id="{{item.id}}" bindtap="removeOne">删除</text>
+      </view>
+    </view>
+  </block>
+</view>

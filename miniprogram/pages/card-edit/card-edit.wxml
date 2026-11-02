@@ -1,0 +1,73 @@
+<view class="page-pad">
+  <text class="page-tip">这张卡片是长期信息，随时可以改。改完立即生效。</text>
+
+  <view class="section-title">常用校区 / 活动范围</view>
+  <view class="card">
+    <input class="field-input" value="{{campus}}" bindinput="onCampus" placeholder="比如：示例大学 · 中心校区" />
+  </view>
+
+  <view class="section-title">过敏原 <text class="req">硬约束来源，建议必填</text></view>
+  <view class="card">
+    <view class="chips">
+      <text wx:for="{{allergies}}" wx:key="id" class="tag {{item.selected ? 'tag-selected' : 'tag-line'}}" data-list="allergies" data-id="{{item.id}}" bindtap="toggle">{{item.label}}</text>
+    </view>
+    <view class="custom-row">
+      <input class="custom-input" placeholder="添加其它过敏原" value="{{customAllergy}}" data-type="allergies" bindinput="onCustomInput" bindconfirm="addCustom" />
+      <button class="btn btn-ghost btn-mini" data-type="allergies" bindtap="addCustom">添加</button>
+    </view>
+  </view>
+
+  <view class="section-title">宗教 / 伦理禁忌 <text class="req">硬约束来源</text></view>
+  <view class="card">
+    <view class="chips">
+      <text wx:for="{{taboos}}" wx:key="id" class="tag {{item.selected ? 'tag-selected' : 'tag-line'}}" data-list="taboos" data-id="{{item.id}}" bindtap="toggle">{{item.label}}</text>
+    </view>
+    <view class="custom-row">
+      <input class="custom-input" placeholder="比如：不吃牛肉" value="{{customTaboo}}" data-type="taboos" bindinput="onCustomInput" bindconfirm="addCustom" />
+      <button class="btn btn-ghost btn-mini" data-type="taboos" bindtap="addCustom">添加</button>
+    </view>
+  </view>
+
+  <view class="section-title">不喜欢的食材</view>
+  <view class="card">
+    <view class="chips">
+      <text wx:for="{{dislikes}}" wx:key="id" class="tag {{item.selected ? 'tag-selected' : 'tag-line'}}" data-list="dislikes" data-id="{{item.id}}" bindtap="toggle">{{item.label}}</text>
+    </view>
+    <view class="custom-row">
+      <input class="custom-input" placeholder="比如：香菜" value="{{customDislike}}" data-type="dislikes" bindinput="onCustomInput" bindconfirm="addCustom" />
+      <button class="btn btn-ghost btn-mini" data-type="dislikes" bindtap="addCustom">添加</button>
+    </view>
+  </view>
+
+  <view class="section-title">预算习惯（每餐）</view>
+  <view class="card">
+    <view class="num-row">
+      <text class="num-prefix">¥</text>
+      <input class="num-input" type="number" value="{{budget}}" bindinput="onBudget" />
+    </view>
+  </view>
+
+  <view class="section-title">口味倾向</view>
+  <view class="card">
+    <view class="chips">
+      <text wx:for="{{tastes}}" wx:key="id" class="tag {{item.selected ? 'tag-selected' : 'tag-line'}}" data-list="tastes" data-id="{{item.id}}" bindtap="toggle">{{item.label}}</text>
+    </view>
+  </view>
+
+  <view class="section-title">常见用餐方式</view>
+  <view class="card">
+    <view class="chips">
+      <text wx:for="{{diningModes}}" wx:key="id" class="tag {{item.selected ? 'tag-selected' : 'tag-line'}}" data-list="diningModes" data-id="{{item.id}}" bindtap="toggle">{{item.label}}</text>
+    </view>
+  </view>
+
+  <view class="section-title">常用食堂 / 商家</view>
+  <view class="card">
+    <input class="field-input" value="{{favoritePlaces}}" bindinput="onFavorite" placeholder="用顿号隔开，比如：一食堂二楼、小吃街" />
+  </view>
+
+  <view class="btn-wrap">
+    <button class="btn btn-primary" bindtap="save">保存卡片</button>
+    <button class="btn btn-plain danger" bindtap="removeCard">删除卡片并重新建档</button>
+  </view>
+</view>

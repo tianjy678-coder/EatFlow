@@ -1,0 +1,97 @@
+.loc-title {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 8rpx;
+}
+
+.loc-desc {
+  font-size: 24rpx;
+  color: var(--ink-3);
+  line-height: 1.5;
+}
+
+.loc-dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  background: var(--safe);
+  margin-left: 16rpx;
+}
+
+.loc-badge {
+  margin-top: 18rpx;
+}
+
+.loc-badge .tag {
+  margin-bottom: 0;
+}
+
+.loc-item {
+  display: flex;
+  align-items: center;
+  padding: 24rpx 4rpx;
+  border-bottom: 2rpx solid var(--line);
+}
+
+.loc-item:last-child {
+  border-bottom: none;
+}
+
+.loc-item.on {
+  background: var(--brand-soft);
+  margin: 0 -16rpx;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  border-radius: 16rpx;
+}
+
+.loc-name {
+  font-size: 28rpx;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.loc-sub {
+  font-size: 22rpx;
+  color: var(--ink-3);
+  margin-top: 6rpx;
+}
+
+.loc-right {
+  display: flex;
+  align-items: center;
+}
+
+.loc-dist {
+  font-size: 22rpx;
+  color: var(--ink-3);
+}
+
+.loc-check {
+  font-size: 30rpx;
+  color: var(--brand);
+  margin-left: 16rpx;
+  font-weight: 700;
+}
+
+.loc-arrow {
+  font-size: 40rpx;
+  color: var(--ink-3);
+  line-height: 1;
+}
+
+.loc-item.no-border {
+  border-bottom: none;
+}
+
+.note {
+  font-size: 22rpx;
+  color: var(--ink-3);
+  line-height: 1.7;
+  padding: 24rpx 8rpx 0;
+}
+
+.btn-fixed {
+  margin-top: 40rpx;
+}

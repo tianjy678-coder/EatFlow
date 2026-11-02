@@ -1,0 +1,7 @@
+{
+  "name": "eatflowSearch",
+  "version": "1.0.0",
+  "description": "EatFlow 周边餐饮搜索（腾讯位置服务 WebService，Key 走环境变量）",
+  "main": "index.js",
+  "dependencies": {}
+}

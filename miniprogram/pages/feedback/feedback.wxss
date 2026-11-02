@@ -1,0 +1,44 @@
+.page-tip {
+  display: block;
+  padding: 8rpx 4px 0 4rpx;
+  color: var(--ink-3);
+  font-size: 24rpx;
+}
+
+.card {
+  margin-top: 0;
+}
+
+.meal-name {
+  display: block;
+  font-size: 34rpx;
+  font-weight: 700;
+}
+
+.meal-meta {
+  display: block;
+  margin-top: 8rpx;
+  color: var(--ink-3);
+  font-size: 24rpx;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.chips .tag {
+  margin-bottom: 12rpx;
+}
+
+.note {
+  margin-top: 24rpx;
+}
+
+.btn-wrap {
+  margin-top: 44rpx;
+}
+
+.btn-wrap .btn {
+  margin-bottom: 20rpx;
+}

@@ -1,0 +1,94 @@
+<view class="page-pad">
+  <!-- 顶部 -->
+  <view class="head">
+    <view class="avatar">E</view>
+    <view class="grow">
+      <text class="app-name">EatFlow</text>
+      <text class="slogan">Food is All You Need</text>
+    </view>
+  </view>
+
+  <!-- 卡片 -->
+  <view class="section-title">我的卡片 <text class="link" wx:if="{{hasCard}}" bindtap="goCardEdit">编辑</text></view>
+  <view class="card" wx:if="{{hasCard}}">
+    <view class="kv-row"><text class="kv-key">校区</text><text class="kv-val">{{campus}}</text></view>
+    <view class="kv-row"><text class="kv-key">预算</text><text class="kv-val">每餐约 ¥{{budget}}</text></view>
+    <view class="kv-row" wx:if="{{tasteChips.length}}"><text class="kv-key">口味</text><text class="kv-val">{{tasteChips}}</text></view>
+    <view class="chip-row" wx:if="{{safeChips.length}}">
+      <text class="tag tag-danger" wx:for="{{safeChips}}" wx:key="*this">{{item}}</text>
+    </view>
+    <text class="muted" wx:if="{{!safeChips.length}}">尚未填写过敏 / 禁忌，建议去卡片里补上</text>
+  </view>
+  <view class="card" wx:if="{{!hasCard}}">
+    <text class="muted">还没有卡片</text>
+    <button class="btn btn-primary card-btn" bindtap="goCardEdit">去建档</button>
+  </view>
+
+  <!-- 功能入口 -->
+  <view class="section-title">位置与数据</view>
+  <view class="card menu">
+    <view class="menu-item" bindtap="goLocation">
+      <text class="menu-emoji">📍</text>
+      <view class="grow">
+        <text class="menu-text">{{locLabel}}</text>
+        <text class="menu-sub">{{locDesc}}</text>
+      </view>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item no-arrow">
+      <text class="menu-emoji">🛡️</text>
+      <view class="grow">
+        <text class="menu-text">过敏严格模式</text>
+        <text class="menu-sub">周边店铺无食材数据，开启后填了过敏/禁忌就不推荐这些店</text>
+      </view>
+      <switch checked="{{strictAllergy}}" color="#FF6B35" bindchange="onStrictToggle" />
+    </view>
+    <view class="menu-item" bindtap="clearPoiCache">
+      <text class="menu-emoji">🗑️</text>
+      <text class="grow menu-text">清除周边缓存</text>
+      <text class="menu-arrow">›</text>
+    </view>
+  </view>
+
+  <view class="card about data-note">
+    <text class="about-line">数据来源：{{dataSource}}</text>
+    <text class="about-line">步行时间来自真实路径规划；人均价格与出餐时长按品类估算，页面会标注。</text>
+  </view>
+
+  <view class="section-title">数据管理</view>
+  <view class="card menu">
+    <view class="menu-item" bindtap="goCandidates">
+      <text class="menu-emoji">🧺</text>
+      <text class="grow menu-text">我的候选池</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item" bindtap="goHistory">
+      <text class="menu-emoji">🕘</text>
+      <text class="grow menu-text">历史记录（{{historyCount}}）</text>
+      <text class="menu-badge" wx:if="{{pendingCount}}">{{pendingCount}} 待反馈</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    <view class="menu-item no-arrow">
+      <text class="menu-emoji">📝</text>
+      <view class="grow">
+        <text class="menu-text">记录历史</text>
+        <text class="menu-sub">关闭后不再新增记录，已有记录保留</text>
+      </view>
+      <switch checked="{{recordHistory}}" color="#FF6B35" bindchange="onRecordToggle" />
+    </view>
+    <view class="menu-item" bindtap="clearHistory">
+      <text class="menu-emoji">🧹</text>
+      <text class="grow menu-text warn-text">清除全部历史</text>
+      <text class="menu-arrow">›</text>
+    </view>
+  </view>
+
+  <!-- 关于 -->
+  <view class="section-title">关于</view>
+  <view class="card about">
+    <text class="about-line">EatFlow 是帮你决定「这一顿吃什么」的饮食决策助手。</text>
+    <text class="about-line">推荐优先级：硬约束 → 本次需求 → 长期卡片 → 历史偏好 → 多样性。</text>
+    <text class="about-line">所有数据仅保存在本机；价格与营业信息为估计值，不代表实时状态。</text>
+    <text class="about-ver">v1.0 · MVP</text>
+  </view>
+</view>

@@ -1,0 +1,94 @@
+<view class="page-pad">
+  <!-- 摘要 -->
+  <view class="summary" wx:if="{{!empty}}">
+    <text class="summary-main">从 {{poolSize}} 个候选里筛掉不合规的，剩下 {{qualifiedCount}} 个，给你这几个：</text>
+    <text class="summary-sub">先硬约束（过敏 / 禁忌 / 预算 / 时间 / 营业），再按你的偏好排序</text>
+    <text class="summary-src" wx:if="{{sourceText}}">数据来源：{{sourceText}}</text>
+  </view>
+
+  <!-- 已选定面板 -->
+  <view class="card chosen" wx:if="{{chosen}}">
+    <text class="chosen-title">✅ 就吃「{{chosen.name}}」</text>
+    <text class="chosen-sub">已记到历史里。吃完后来反馈一下，下次更懂你。</text>
+    <view class="btn-row">
+      <button class="btn btn-primary btn-half" bindtap="goFeedback">记录餐后反馈</button>
+      <button class="btn btn-plain btn-half" bindtap="goDemand">改主意，重来</button>
+    </view>
+  </view>
+
+  <!-- 冲突诊断 -->
+  <view class="card conflict" wx:if="{{empty}}">
+    <text class="conflict-title">😅 没有符合全部条件的选项</text>
+    <text class="conflict-sub">我没有偷偷放宽你的约束，冲突在这里：</text>
+    <view class="conflict-item" wx:for="{{conflicts}}" wx:key="type">
+      <text class="conflict-text">· {{item.message}}</text>
+    </view>
+    <block wx:if="{{relax.length}}">
+      <text class="conflict-hint">可以这样放宽：</text>
+      <button
+        wx:for="{{relax}}"
+        wx:key="index"
+        class="btn btn-ghost relax-btn"
+        data-idx="{{index}}"
+        bindtap="applyRelax">{{item.message}}</button>
+    </block>
+    <button class="btn btn-plain relax-btn" bindtap="goDemand">重新调整本次需求</button>
+  </view>
+
+  <!-- 推荐列表 -->
+  <view class="card pick" wx:for="{{picks}}" wx:key="id">
+    <view class="row-between">
+      <view class="grow">
+        <text class="pick-name">{{item.name}}</text>
+        <text class="pick-venue">{{item.venue}} · {{item.scene}}</text>
+      </view>
+      <view class="pick-side">
+        <text class="pick-price">{{item.price}}</text>
+        <text class="pick-time">约 {{item.totalMin}} 分钟</text>
+        <text class="pick-dist" wx:if="{{item.distanceText}}">步行 {{item.walkMin}} 分 · {{item.distanceText}}</text>
+      </view>
+    </view>
+
+    <view class="tag-wrap">
+      <text class="tag tag-line" wx:for="{{item.tags}}" wx:for-item="t" wx:key="*this">{{t}}</text>
+    </view>
+
+    <view class="flag-wrap" wx:if="{{item.flags.length}}">
+      <text class="flag" wx:for="{{item.flags}}" wx:for-item="f" wx:key="*this">{{f}}</text>
+    </view>
+
+    <view class="reason-block">
+      <text class="reason-label">为什么适合我</text>
+      <text class="reason-line" wx:if="{{!item.whyMe.length}}">本次没有特别匹配的偏好，按候选池排序得出</text>
+      <text class="reason-line" wx:for="{{item.whyMe}}" wx:key="*this">· {{item}}</text>
+    </view>
+
+    <view class="reason-block">
+      <text class="reason-label">为什么适合现在</text>
+      <text class="reason-line" wx:for="{{item.whyNow}}" wx:key="*this">· {{item}}</text>
+    </view>
+
+    <view class="reason-block" wx:if="{{item.tradeoffs.length}}">
+      <text class="reason-label warn">关键取舍</text>
+      <text class="reason-line warn" wx:for="{{item.tradeoffs}}" wx:key="*this">· {{item}}</text>
+    </view>
+
+    <view class="next-step">
+      <text class="reason-label">下一步</text>
+      <text class="next-text">{{item.next}}</text>
+    </view>
+
+    <button class="btn btn-primary pick-btn" data-id="{{item.id}}" bindtap="choose">就吃这个</button>
+  </view>
+
+  <!-- 底部动作 -->
+  <view class="bottom-actions" wx:if="{{!empty}}">
+    <view class="btn-row">
+      <button wx:if="{{canShuffle}}" class="btn btn-ghost btn-half" bindtap="shuffle">换一批</button>
+      <button class="btn btn-ghost btn-half" bindtap="goWheel">几个都想要？转盘决定</button>
+    </view>
+    <button class="btn btn-plain" bindtap="goDemand">调整本次需求</button>
+  </view>
+
+  <text class="footer-note" wx:if="{{!empty}}">价格与出餐时间为估计值，不代表实时库存；能否吃上以现场为准</text>
+</view>

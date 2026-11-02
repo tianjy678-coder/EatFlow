@@ -1,0 +1,11 @@
+# 不要把真实密钥写进仓库
+*.local.js
+.env
+.env.*
+cloudfunctions/*/config.local.json
+
+# 抓取过程中的中间产物（含 POI 原始数据，体积大且可再生成）
+tools/lbs-fetch/raw-*.json
+
+# 依赖
+node_modules/

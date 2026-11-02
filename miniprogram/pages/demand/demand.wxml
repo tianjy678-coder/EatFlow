@@ -1,0 +1,118 @@
+<view class="page-pad">
+  <text class="page-tip">只影响这一次决策，不会改写你的长期卡片</text>
+
+  <!-- 在哪 -->
+  <view class="section-title">现在在哪</view>
+  <view class="card loc-card" bindtap="goLocation">
+    <view class="grow">
+      <view class="loc-main">{{locLabel}}</view>
+      <view class="loc-sub2">{{locDesc}}</view>
+    </view>
+    <text class="loc-arrow">›</text>
+  </view>
+
+  <!-- 场景 -->
+  <view class="section-title">想去哪种场景 <text class="hint">可多选，选中的会被硬性保留</text></view>
+  <view class="card">
+    <view class="chips">
+      <text
+        wx:for="{{scenes}}"
+        wx:key="id"
+        class="tag {{item.selected ? 'tag-selected' : 'tag-line'}}"
+        data-group="scenes"
+        data-multi="1"
+        data-id="{{item.id}}"
+        bindtap="toggleChip">{{item.label}}</text>
+    </view>
+  </view>
+
+  <!-- 预算 -->
+  <view class="section-title">这顿最多花多少</view>
+  <view class="card">
+    <view class="num-row">
+      <text class="num-prefix">¥</text>
+      <input class="num-input" type="number" value="{{budgetMax}}" bindinput="onBudgetInput" />
+    </view>
+    <view class="switch-row">
+      <view class="grow">
+        <text class="switch-title">设为严格上限</text>
+        <text class="switch-sub">开启后，超预算的选项会被直接排除</text>
+      </view>
+      <switch checked="{{budgetStrict}}" color="#FF6B35" bindchange="onBudgetStrict" />
+    </view>
+  </view>
+
+  <!-- 时间 -->
+  <view class="section-title">还有多少时间能吃到</view>
+  <view class="card">
+    <view class="num-row">
+      <input class="num-input" type="number" value="{{timeMax}}" bindinput="onTimeInput" />
+      <text class="num-suffix">分钟（含步行 + 出餐）</text>
+    </view>
+    <view class="switch-row">
+      <view class="grow">
+        <text class="switch-title">设为严格上限</text>
+        <text class="switch-sub">开启后，来不及的选项会被直接排除</text>
+      </view>
+      <switch checked="{{timeStrict}}" color="#FF6B35" bindchange="onTimeStrict" />
+    </view>
+  </view>
+
+  <!-- 冷热 -->
+  <view class="section-title">想吃热乎的还是清淡的</view>
+  <view class="card">
+    <view class="chips">
+      <text
+        wx:for="{{prefers}}"
+        wx:key="id"
+        class="tag {{item.selected ? 'tag-selected' : 'tag-line'}}"
+        data-group="prefers"
+        data-id="{{item.id}}"
+        bindtap="toggleChip">{{item.label}}</text>
+    </view>
+  </view>
+
+  <!-- 人数 -->
+  <view class="section-title">和谁一起吃</view>
+  <view class="card">
+    <view class="chips">
+      <text
+        wx:for="{{companies}}"
+        wx:key="id"
+        class="tag {{item.selected ? 'tag-selected' : 'tag-line'}}"
+        data-group="companies"
+        data-id="{{item.id}}"
+        bindtap="toggleChip">{{item.label}}</text>
+    </view>
+  </view>
+
+  <!-- 心情 -->
+  <view class="section-title">今天的心情</view>
+  <view class="card">
+    <view class="chips">
+      <text
+        wx:for="{{moods}}"
+        wx:key="id"
+        class="tag {{item.selected ? 'tag-selected' : 'tag-line'}}"
+        data-group="moods"
+        data-id="{{item.id}}"
+        bindtap="toggleChip">{{item.label}}</text>
+    </view>
+  </view>
+
+  <!-- 已有候选 -->
+  <view class="section-title">已经有想吃的了吗 <text class="hint">可选</text></view>
+  <view class="card">
+    <textarea
+      class="field-textarea"
+      placeholder="比如：麻辣烫、黄焖鸡，用空格或逗号隔开；会优先在候选里帮你匹配"
+      value="{{candidatesText}}"
+      bindinput="onCandidatesInput"
+      maxlength="80" />
+  </view>
+
+  <view class="btn-wrap">
+    <button class="btn btn-primary" bindtap="confirm">就按这个，给我建议</button>
+    <button class="btn btn-plain" bindtap="resetDemand">恢复默认</button>
+  </view>
+</view>

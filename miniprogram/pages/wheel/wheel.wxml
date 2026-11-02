@@ -1,0 +1,53 @@
+<view class="page-pad">
+  <view class="intro">
+    <text class="intro-title">🎲 转盘决定</text>
+    <text class="intro-sub">只在通过硬约束筛选的 {{qualifiedCount}} 个候选里转，不推荐违规项</text>
+  </view>
+
+  <!-- 空池 -->
+  <view class="card empty-state" wx:if="{{emptyPool}}">
+    <text class="empty-emoji">🫙</text>
+    <text class="empty-main">当前条件下没有合格候选</text>
+    <text class="empty-sub">先放宽一下本次需求，再来转</text>
+    <button class="btn btn-primary" bindtap="goDemand">去调整本次需求</button>
+  </view>
+
+  <block wx:if="{{!emptyPool}}">
+    <!-- 转盘 -->
+    <view class="wheel-wrap">
+      <canvas type="2d" id="wheel" class="wheel-canvas" wx:if="{{canvasReady}}"></canvas>
+      <view class="wheel-fallback" wx:if="{{!canvasReady}}">
+        <text class="empty-main">画布不可用</text>
+        <text class="empty-sub">可以直接看下面的候选列表</text>
+      </view>
+    </view>
+
+    <button class="btn btn-primary spin-btn {{spinning ? 'disabled' : ''}}" bindtap="spin" disabled="{{spinning}}">
+      {{spinning ? '转动中…' : (result ? '再转一次' : '开始转！')}}
+    </button>
+
+    <!-- 温和提示 -->
+    <view class="card nag" wx:if="{{showNag}}">
+      <text class="nag-text">你已经重抽 {{respins}} 次了。反复重抽往往说明：心里其实更想要某个。要不要直接选它？</text>
+    </view>
+
+    <!-- 结果 -->
+    <view class="card result" wx:if="{{result}}">
+      <text class="result-label">🎉 转到了</text>
+      <text class="result-name">{{result.name}}</text>
+      <text class="result-meta">{{result.venue}} · {{result.price}}</text>
+      <view class="btn-row">
+        <button class="btn btn-primary btn-half" bindtap="pickResult">就吃这个</button>
+        <button class="btn btn-plain btn-half" bindtap="goResult">回去看推荐</button>
+      </view>
+      <text class="result-note">转盘只是帮你下决定，不比你的意愿更权威</text>
+    </view>
+
+    <!-- 候选列表 -->
+    <view class="section-title">这盘转的是什么 <text class="hint">前 {{candidates.length}} 个合格候选</text></view>
+    <view class="card cand" wx:for="{{candidates}}" wx:key="id">
+      <text class="cand-name">{{item.name}}</text>
+      <text class="cand-meta">{{item.venue}} · {{item.price}}</text>
+    </view>
+  </block>
+</view>

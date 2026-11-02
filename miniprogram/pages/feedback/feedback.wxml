@@ -1,0 +1,61 @@
+<view class="page-pad">
+  <!-- 找不到记录 -->
+  <view class="card empty" wx:if="{{missing}}">
+    <text class="emoji">🔍</text>
+    <text class="main">没找到要反馈的那一餐</text>
+    <text>可以先去首页重新发起一次决策</text>
+  </view>
+
+  <block wx:if="{{entry}}">
+    <text class="page-tip">轻量反馈，10 秒搞定 —— 只用于减少重复、校准排序</text>
+
+    <view class="card">
+      <text class="meal-name">{{entry.name}}</text>
+      <text class="meal-meta">{{entry.venue}} · {{entry.scene}}</text>
+    </view>
+
+    <view class="section-title">实际吃了吗</view>
+    <view class="card">
+      <view class="chips">
+        <text
+          wx:for="{{ateOptions}}"
+          wx:key="id"
+          class="tag {{item.selected ? 'tag-selected' : 'tag-line'}}"
+          data-id="{{item.id}}"
+          bindtap="toggleAte">{{item.label}}</text>
+      </view>
+    </view>
+
+    <view class="section-title">满意吗</view>
+    <view class="card">
+      <view class="chips">
+        <text
+          wx:for="{{ratingOptions}}"
+          wx:key="id"
+          class="tag {{item.selected ? 'tag-selected' : 'tag-line'}}"
+          data-id="{{item.id}}"
+          bindtap="toggleRating">{{item.label}}</text>
+      </view>
+    </view>
+
+    <block wx:if="{{reasons.length}}">
+      <view class="section-title">为什么 <text class="hint">可多选，也可以跳过</text></view>
+      <view class="card">
+        <view class="chips">
+          <text
+            wx:for="{{reasons}}"
+            wx:key="id"
+            class="tag {{item.selected ? 'tag-selected' : 'tag-line'}}"
+            data-id="{{item.id}}"
+            bindtap="toggleReason">{{item.label}}</text>
+        </view>
+        <textarea class="field-textarea note" placeholder="想多说的写这里（可选）" value="{{note}}" bindinput="onNoteInput" maxlength="100" />
+      </view>
+    </block>
+
+    <view class="btn-wrap">
+      <button class="btn btn-primary" bindtap="submit">提交反馈</button>
+      <button class="btn btn-plain" bindtap="skip">先跳过</button>
+    </view>
+  </block>
+</view>

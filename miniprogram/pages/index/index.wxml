@@ -1,0 +1,72 @@
+<view class="page-pad">
+  <!-- 顶部 -->
+  <view class="hero">
+    <text class="hero-slogan">{{slogan}}</text>
+    <text class="hero-title">这一顿吃什么？</text>
+  </view>
+
+  <!-- 待反馈提示 -->
+  <view class="card pending" wx:if="{{pending}}">
+    <view class="row">
+      <text class="pending-emoji">🍽️</text>
+      <view class="grow">
+        <text class="pending-title">上次选了「{{pending.name}}」，吃完了吗？</text>
+        <text class="pending-sub">花 10 秒记录一下，下次推荐会更准</text>
+      </view>
+    </view>
+    <button class="btn btn-primary btn-mini pending-btn" bindtap="goFeedback">去反馈</button>
+  </view>
+
+  <!-- 个性化卡片摘要 -->
+  <view class="card" wx:if="{{cardSummary}}">
+    <view class="row-between">
+      <text class="card-title">我的卡片</text>
+      <text class="link" bindtap="goCardEdit">查看 / 修改</text>
+    </view>
+    <view class="tag-wrap" wx:if="{{cardSummary.safe.length}}">
+      <text class="tag tag-danger" wx:for="{{cardSummary.safe}}" wx:key="*this">{{item}}</text>
+    </view>
+    <view class="tag-wrap" wx:if="{{!cardSummary.safe.length}}">
+      <text class="muted">未填写过敏 / 禁忌 —— 强烈建议补上，这属于硬约束</text>
+    </view>
+    <view class="kv-row">
+      <text class="kv-key">预算习惯</text>
+      <text class="kv-val">每餐约 ¥{{cardSummary.budget}}</text>
+    </view>
+    <view class="kv-row" wx:if="{{cardSummary.tastes.length}}">
+      <text class="kv-key">口味倾向</text>
+      <text class="kv-val">{{cardSummary.tastes}}</text>
+    </view>
+    <view class="kv-row">
+      <text class="kv-key">常用方式</text>
+      <text class="kv-val">{{cardSummary.modes}}</text>
+    </view>
+  </view>
+
+  <!-- 位置 -->
+  <view class="card loc-card" bindtap="goLocation">
+    <view class="grow">
+      <text class="card-title">{{locLabel}}</text>
+      <text class="muted small">{{locDesc}}</text>
+    </view>
+    <text class="link">切换 ›</text>
+  </view>
+
+  <!-- 本次需求 -->
+  <view class="card">
+    <view class="row-between">
+      <text class="card-title">本次需求</text>
+      <text class="link" bindtap="goDemand">修改</text>
+    </view>
+    <text class="demand-summary">{{demandSummary}}</text>
+    <text class="muted small">当前位置可用候选 {{poolCount}} 项 · 单次需求不会改写长期卡片</text>
+  </view>
+
+  <!-- 行动 -->
+  <view class="cta-wrap">
+    <button class="btn btn-primary cta" bindtap="startDecide">开始决定，给我 2-3 个建议</button>
+    <button class="btn btn-plain" bindtap="goDemand">先调整本次需求</button>
+  </view>
+
+  <text class="footer-note">价格与时间为估计值，营业情况请以实际为准</text>
+</view>

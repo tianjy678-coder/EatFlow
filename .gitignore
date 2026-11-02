@@ -1,0 +1,24 @@
+# 依赖
+**/node_modules/
+
+# 课堂展示材料（PPT / 演示视频 / 截图 / 生成脚本，仅本地保留）
+EatFlow课堂展示/
+
+# 录制/截图/构建中间产物
+**/.check/
+**/.shots/
+**/.slidep/
+**/.workbuddy/
+*.webm
+
+# 课程汇报原件（文件名含学号姓名，不入库）
+汇报/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 编辑器/工具缓存
+**/.cache/
+*.genie

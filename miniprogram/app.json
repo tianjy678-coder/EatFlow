@@ -1,0 +1,51 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/history/history",
+    "pages/profile/profile",
+    "pages/onboard/onboard",
+    "pages/demand/demand",
+    "pages/result/result",
+    "pages/wheel/wheel",
+    "pages/feedback/feedback",
+    "pages/card-edit/card-edit",
+    "pages/candidates/candidates",
+    "pages/location/location"
+  ],
+  "window": {
+    "navigationBarTitleText": "EatFlow",
+    "navigationBarBackgroundColor": "#FFF8F3",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#FFF8F3",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#B0A69A",
+    "selectedColor": "#FF6B35",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "吃什么",
+        "iconPath": "assets/tabbar/decide.png",
+        "selectedIconPath": "assets/tabbar/decide_on.png"
+      },
+      {
+        "pagePath": "pages/history/history",
+        "text": "记录",
+        "iconPath": "assets/tabbar/history.png",
+        "selectedIconPath": "assets/tabbar/history_on.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "assets/tabbar/profile.png",
+        "selectedIconPath": "assets/tabbar/profile_on.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

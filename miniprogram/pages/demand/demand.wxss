@@ -1,0 +1,94 @@
+.page-tip {
+  display: block;
+  padding: 8rpx 4rpx 0;
+  color: var(--ink-3);
+  font-size: 24rpx;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.chips .tag {
+  margin-bottom: 14rpx;
+}
+
+.loc-card {
+  display: flex;
+  align-items: center;
+}
+
+.loc-main {
+  font-size: 30rpx;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.loc-sub2 {
+  font-size: 22rpx;
+  color: var(--ink-3);
+  margin-top: 6rpx;
+  line-height: 1.5;
+}
+
+.loc-arrow {
+  font-size: 44rpx;
+  color: var(--ink-3);
+  line-height: 1;
+  margin-left: 12rpx;
+}
+
+  display: flex;
+  align-items: center;
+  background: var(--bg);
+  border-radius: 18rpx;
+  padding: 18rpx 24rpx;
+}
+
+.num-prefix {
+  color: var(--brand);
+  font-size: 34rpx;
+  font-weight: 600;
+  margin-right: 12rpx;
+}
+
+.num-suffix {
+  margin-left: 16rpx;
+  color: var(--ink-3);
+  font-size: 24rpx;
+}
+
+.num-input {
+  flex: 1;
+  font-size: 34rpx;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.switch-row {
+  display: flex;
+  align-items: center;
+  margin-top: 24rpx;
+}
+
+.switch-title {
+  display: block;
+  font-size: 26rpx;
+  color: var(--ink);
+}
+
+.switch-sub {
+  display: block;
+  margin-top: 4rpx;
+  font-size: 22rpx;
+  color: var(--ink-3);
+}
+
+.btn-wrap {
+  margin-top: 44rpx;
+}
+
+.btn-wrap .btn {
+  margin-bottom: 20rpx;
+}
